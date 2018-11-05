@@ -56,8 +56,6 @@ public class GetImageServlet extends HttpServlet {
         if (id==null){
             image= "https://upload.wikimedia.org/wikipedia/commons/9/9a/PNG_transparency_demonstration_2.png";
         }
-        
-       
 //        利用 IOUtils 的 copy 函式，將 image 輸出
 //        你會利用到 URL 類別的建構子以及 URL 類別的 openStream 函式
 //        來開啟影像的 InputStream

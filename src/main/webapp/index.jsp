@@ -11,9 +11,9 @@
         <a href="settings.jsp">Set Images</a>
         <table style="width: 80%; height: 80%" border="1">
             <tr>
-                <td style="width: 33%"><img src="image?id=1" style="width:100%"/></td>
-                <td style="width: 33%"><img src="image?id=2" style="width:100%"/></td>
-                <td><img src="image?id=3" style="width:100%"/></td>
+                <td style="width: 33%"><img src="image?id=image1" style="width:100%"/></td>
+                <td style="width: 33%"><img src="image?id=image2" style="width:100%"/></td>
+                <td><img src="image?id=image3" style="width:100%"/></td>
             </tr>
         </table>
     </body>
