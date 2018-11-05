@@ -8,7 +8,9 @@ package lendle.courses.network.midterm;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import static java.lang.System.out;
 import java.net.URL;
+import static java.time.Clock.system;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,18 +37,35 @@ public class GetImageServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("image/png");
-        String defaultImageString="https://upload.wikimedia.org/wikipedia/commons/9/9a/PNG_transparency_demonstration_2.png";
-        /*
+        response.setContentType("image/png");      
+         /*
         從 request 抓出 parameter id
         以這個 id 從 session 裡面找出對應的 image 網址
         注意，如果是 null，要用 defaultImageString
         利用 IOUtils 的 copy 函式，將 image 輸出
-        
         你會利用到 URL 類別的建構子以及 URL 類別的 openStream 函式
         來開啟影像的 InputStream
         */
+        String defaultImageString="https://upload.wikimedia.org/wikipedia/commons/9/9a/PNG_transparency_demonstration_2.png";
+//        從 request 抓出 parameter id
+        String id = request.getParameter("id");
+//        以這個 id 從 session 裡面找出對應的 image 網址
+        HttpSession session =request.getSession();
+        String image=(String)session.getAttribute(id);       
+//         注意，如果是 null，要用 defaultImageString
+        if (id==null){
+            image= "https://upload.wikimedia.org/wikipedia/commons/9/9a/PNG_transparency_demonstration_2.png";
+        }
+        
        
+//        利用 IOUtils 的 copy 函式，將 image 輸出
+//        你會利用到 URL 類別的建構子以及 URL 類別的 openStream 函式
+//        來開啟影像的 InputStream
+        try (OutputStream o= response.getOutputStream();
+                InputStream input = 
+                new URL(image).openStream()) {
+            IOUtils.copy(input,o);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
